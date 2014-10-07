@@ -1,0 +1,1 @@
+valid = ['platform', 'game', 'side']

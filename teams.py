@@ -1,0 +1,1 @@
+valid = ['hr', 'managers', 'game']
