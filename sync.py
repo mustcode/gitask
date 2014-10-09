@@ -11,8 +11,12 @@ def commit():
     commitMsg = subprocess.getoutput('git status --short')
     subprocess.call('git commit -m "{0}"'.format(commitMsg))
 
+def push():
+    subprocess.call('git push -u origin master')
+
 def sync():
-    pull();
-    commit();
+    pull()
+    commit()
+    push()
 
 sync()
