@@ -17,10 +17,11 @@ status = [SUBMITTED, APPROVED, REJECTED, BACKLOG, SPRINT, DOING, CHECK, DONE, AR
 
 FEATURE = 'feature'
 IMPROVEMENT = 'improvement'
+ISSUE = 'issue'
 BUG = 'bug'
 WORKITEM = 'workitem'
 
-types = [FEATURE, IMPROVEMENT, BUG, WORKITEM]
+types = [FEATURE, IMPROVEMENT, ISSUE, BUG, WORKITEM]
 
 def path(taskName):
     dirName = taskName.replace(' ', '_')
