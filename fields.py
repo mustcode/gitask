@@ -11,6 +11,7 @@ import priority
 import complexity
 
 CREATED_BY = 'created_by'
+CREATED_TIME = 'created_time'
 PROJECTS = 'projects'
 TEAMS = 'teams'
 TYPE = 'type'
@@ -30,6 +31,7 @@ TAGS = 'tags'
 
 fieldsData = {
     CREATED_BY: { 'dataType': users.valid, 'isList': False },
+    CREATED_TIME: { 'dataType': None, 'isList': False },
     PROJECTS: { 'dataType': projects.valid, 'isList': True },
     TEAMS: { 'dataType': teams.valid, 'isList': True },
     TYPE: { 'dataType': tasks.types, 'isList': False },
