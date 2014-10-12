@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 import settings
 
@@ -35,8 +36,21 @@ def add(taskName):
     descFile = open(taskPath + os.sep + 'description.txt', 'w')
     descFile.write('write description for this task here...')
     descFile.close()
-    
-    commentsFile = open(taskPath + os.sep + 'comments.txt', 'w')
-    commentsFile.close()
+    commentsPath = taskPath + os.sep + 'comments'
+    os.makedirs(commentsPath)
 
     return taskPath
+
+def comment(taskPath, author, comments):
+    assert isinstance(taskPath, str)
+    assert isinstance(author, str)
+    assert isinstance(comments, str)
+
+    commentsPath = taskPath + os.sep + 'comments'
+    if not os.path.exists(commentsPath):
+        os.makedirs(commentsPath)
+
+    commentTime = datetime.now().strftime('%Y%m%dT%H%M%S')
+    commentFile = open(commentsPath + os.sep + commentTime + '_by_' + author + '.txt', 'w')
+    commentFile.write(comments)
+    commentFile.close()
