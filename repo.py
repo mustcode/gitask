@@ -4,11 +4,11 @@ def pull():
     subprocess.call(['git', 'pull', 'origin', 'master'])
 
 def commit():
-    changes = subprocess.getoutput(['git', 'status', '--short'])
+    changes = subprocess.getoutput(['git', 'status', '-s'])
     if not changes:
         return
     subprocess.call(['git', 'add', '--all', '.'])
-    commitMsg = subprocess.getoutput(['git', 'status', '--short'])
+    commitMsg = subprocess.getoutput(['git', 'status', '-s'])
     subprocess.call(['git', 'commit', '-m', "{0}".format(commitMsg)])
 
 def push():
