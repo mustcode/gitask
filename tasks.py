@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+import time
 
 import settings
 
@@ -50,7 +50,7 @@ def comment(taskPath, author, comments):
     if not os.path.exists(commentsPath):
         os.makedirs(commentsPath)
 
-    commentTime = datetime.now().strftime('%Y%m%dT%H%M%S')
+    commentTime = time.strftime('%Y%m%dT%H%M%S', time.gmtime())
     commentFile = open(commentsPath + os.sep + commentTime + '_by_' + author + '.txt', 'w')
     commentFile.write(comments)
     commentFile.close()

@@ -1,7 +1,7 @@
 import sys
 import os
 import fileinput
-from datetime import datetime
+import time
 
 import users
 import tasks
@@ -21,6 +21,6 @@ if os.path.exists(tasks.path(taskName)):
 print('adding task: ' + taskName)
 taskPath = tasks.add(taskName)
 fields.add(taskPath, fields.CREATED_BY, users.current)
-fields.add(taskPath, fields.CREATED_TIME, datetime.now().strftime('%Y%m%dT%H%M%S'))
+fields.add(taskPath, fields.CREATED_TIME, time.strftime('%Y%m%dT%H%M%S', time.gmtime()))
 log.add('addtask ' + taskName)
 print('task added.')
