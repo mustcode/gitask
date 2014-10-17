@@ -3,7 +3,7 @@ import time
 
 import settings
 
-SUBMITTED = 'submitted'
+REQUESTED = 'requested'
 APPROVED = 'approved'
 REJECTED = 'rejected'
 BACKLOG = 'backlog'
@@ -14,7 +14,7 @@ DONE = 'done'
 ARCHIVED = 'arhived'
 PROBLEM = 'problem'
 
-status = [SUBMITTED, APPROVED, REJECTED, BACKLOG, SPRINT, DOING, CHECK, DONE, ARCHIVED, PROBLEM]
+status = [REQUESTED, APPROVED, REJECTED, BACKLOG, SPRINT, DOING, CHECK, DONE, ARCHIVED, PROBLEM]
 
 FEATURE = 'feature'
 IMPROVEMENT = 'improvement'
