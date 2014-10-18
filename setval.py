@@ -6,7 +6,7 @@ import log
 
 if len(sys.argv) != 4:
     print('error: expected 3 arguments')
-    print('usage: setval [path/to/task/dir] [field] [value]')
+    print('usage: setval <path-to-task> <field> <value>')
     sys.exit()
 
 sys.argv[0] = 'setval'

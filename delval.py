@@ -7,7 +7,7 @@ import log
 argvCount = len(sys.argv)
 if argvCount != 3 and argvCount != 4:
     print('error: expected 2-3 arguments')
-    print('usage: delval [path/to/task/dir] [field] [optional:value]')
+    print('usage: delval <path-to-task> <field> [<value>]')
     sys.exit()
 
 sys.argv[0] = 'delval'

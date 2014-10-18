@@ -6,7 +6,7 @@ import log
 
 if len(sys.argv) < 3:
     print('error: expected 2 arguments')
-    print('usage: comment [path/to/task/dir] [comments]')
+    print('usage: comment <path-to-task> <comments>')
     sys.exit()
 
 sys.argv[0] = 'comment'
