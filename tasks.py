@@ -4,7 +4,6 @@ import time
 import settings
 
 REQUESTED = 'requested'
-APPROVED = 'approved'
 REJECTED = 'rejected'
 BACKLOG = 'backlog'
 SPRINT = 'sprint'
@@ -14,7 +13,7 @@ DONE = 'done'
 ARCHIVED = 'arhived'
 PROBLEM = 'problem'
 
-status = [REQUESTED, APPROVED, REJECTED, BACKLOG, SPRINT, DOING, CHECK, DONE, ARCHIVED, PROBLEM]
+status = [REQUESTED, REJECTED, BACKLOG, SPRINT, DOING, CHECK, DONE, ARCHIVED, PROBLEM]
 
 FEATURE = 'feature'
 IMPROVEMENT = 'improvement'
