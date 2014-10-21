@@ -9,6 +9,10 @@ def show(fromProjects, sortField, flat):
     assert isinstance(fromProjects, list)
     assert isinstance(sortField, str)
 
+    if not os.path.exists(settings.TASKS_DIR):
+        print('error: task folder not found.')
+        return
+
     viewPath = settings.VIEWS_DIR + os.sep + '_'.join(fromProjects) + '-' + sortField
     
     if os.path.exists(viewPath):
@@ -53,8 +57,18 @@ def show(fromProjects, sortField, flat):
 
 if len(sys.argv) < 2:
     print('error: expected at least 1 arguments')
-    print('usage: view [<projects...>] <sort-field>')
+    print('usage: view [-f] [<projects...>] <sort-field>')
+    print('options:')
+    print('-f : view result in flat view')
     sys.exit()
+
+flatView = False
+for i in range(len(sys.argv)):
+    if sys.argv[i] != '-f' and sys.argv[i] != '--flat':
+        continue
+    flatView = True
+    del sys.argv[i]
+    break
 
 if len(sys.argv) == 2:
     fromProjects = []
@@ -63,4 +77,4 @@ else:
 sortField = sys.argv[-1]
 print("from projects: " + str(fromProjects))
 print("sort field: " + sortField)
-show(fromProjects, sortField, False)
+show(fromProjects, sortField, flatView)
