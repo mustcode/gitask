@@ -2,6 +2,7 @@ import sys
 import os
 import glob
 import shutil
+from enum import Enum
 
 import users
 import tasks
@@ -63,8 +64,10 @@ def add(taskPath, field, value, replaceCurrentList = False):
     assert isinstance(taskPath, str)
     assert isValid(field, value)
 
-    fieldPath = taskPath + os.sep + field
-    if isList(field):    
+    if isinstance(value, Enum):
+        value = value.name
+    fieldPath = taskPath + os.sep + field.name
+    if isList(field):
         if not os.path.exists(fieldPath):
             os.makedirs(fieldPath)
         elif replaceCurrentList:
@@ -78,17 +81,19 @@ def add(taskPath, field, value, replaceCurrentList = False):
     filePtr = open(fieldPath + '-' + str(value), 'w')
     filePtr.close()
 
-def remove(taskPath, field, valueToRemove = None):
+def remove(taskPath, field, value = None):
     assert isinstance(taskPath, str)
     assert isValid(field)
 
-    fieldPath = taskPath + os.sep + field
+    fieldPath = taskPath + os.sep + field.name
     if isList(field):
         assert os.path.exists(fieldPath)
-        if not valueToRemove:
+        if not value:
             shutil.rmtree(fieldPath)
             return
-        valueFile = fieldPath + os.sep + str(valueToRemove)
+        if isinstance(value, Enum):
+            value = value.name
+        valueFile = fieldPath + os.sep + str(value)
         assert os.path.isfile(valueFile)
         os.remove(valueFile)
         try:
@@ -97,7 +102,7 @@ def remove(taskPath, field, valueToRemove = None):
             pass
         return
 
-    currentValue = glob.glob(taskPath + os.sep + field + '-*')
+    currentValue = glob.glob(taskPath + os.sep + field.name + '-*')
     if not currentValue:
         return
     assert len(currentValue) == 1

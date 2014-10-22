@@ -27,15 +27,19 @@ try:
 except:
     print('error: ' + field + ' field does not exist')
     sys.exit()
+try:
+    value = fields.dataType(field)[value]
+except:
+    pass
 
 if not fields.isValid(field):
     print('error: ' + field + 'is not a valid field')
     sys.exit()
 
 if value:
-    print("deleting value: " + value + ' in field: ' + field)
+    print("deleting value: " + str(value) + ' in field: ' + field.name)
 else:
-    print("deleting field: " + field)
+    print("deleting field: " + field.name)
 
 fields.remove(taskPath, field, value)
 log.add(' '.join(sys.argv))

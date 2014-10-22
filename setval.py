@@ -1,5 +1,6 @@
 import sys
 import os
+from enum import Enum
 
 import fields
 import log
@@ -23,9 +24,13 @@ try:
 except:
     print('error: ' + field + ' field does not exist')
     sys.exit()
-    
+try:
+    value = fields.dataType(field)[value]
+except:
+    pass
+
 if not fields.isValid(field, value):
-    print('error: ' + field + ' = ' + value + ' is not a valid field/value pair')
+    print('error: ' + field.name + ' = ' + str(value) + ' is not a valid field/value pair')
     sys.exit()
 
 print("setting field: %s = %s" % (field, value))
