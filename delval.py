@@ -22,6 +22,12 @@ if not os.path.exists(taskPath):
     print('error: ' + taskPath + ' does not exist')
     sys.exit()
 
+try:
+    field = fields.Field[field]
+except:
+    print('error: ' + field + ' field does not exist')
+    sys.exit()
+
 if not fields.isValid(field):
     print('error: ' + field + 'is not a valid field')
     sys.exit()

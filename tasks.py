@@ -1,27 +1,26 @@
 import os
 import time
+from enum import Enum
 
 import settings
 
-REQUESTED = 'requested'
-REJECTED = 'rejected'
-BACKLOG = 'backlog'
-SPRINT = 'sprint'
-DOING = 'doing'
-CHECK = 'check'
-DONE = 'done'
-ARCHIVED = 'arhived'
-PROBLEM = 'problem'
+class Status(Enum):
+    requested = 1
+    rejected = 2
+    backlog = 3
+    sprint = 4
+    doing = 5
+    check = 6
+    done = 7
+    arhived = 8
+    problem = 9
 
-status = [REQUESTED, REJECTED, BACKLOG, SPRINT, DOING, CHECK, DONE, ARCHIVED, PROBLEM]
-
-FEATURE = 'feature'
-IMPROVEMENT = 'improvement'
-ISSUE = 'issue'
-BUG = 'bug'
-WORKITEM = 'workitem'
-
-types = [FEATURE, IMPROVEMENT, ISSUE, BUG, WORKITEM]
+class Type(Enum):
+    feature = 1
+    improvement = 2
+    issue = 3
+    bug = 4
+    workitem = 5
 
 def path(taskName):
     dirName = taskName.replace(' ', '_')

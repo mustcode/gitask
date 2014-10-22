@@ -31,7 +31,7 @@ def show(fromProjects, sortField, flat):
         taskPath = settings.TASKS_DIR + os.sep + task
 
         if fromProjects:
-            projectsPath = taskPath + os.sep + fields.PROJECTS
+            projectsPath = taskPath + os.sep + fields.Field.projects
             if os.path.exists(projectsPath):
                 projectsAssigned = os.listdir(projectsPath)
             else:
@@ -74,7 +74,14 @@ if len(sys.argv) == 2:
     fromProjects = []
 else:
     fromProjects = sys.argv[1:-1]
-sortField = sys.argv[-1]
+field = sys.argv[-1]
+
+try:
+    field = fields.Field[field]
+except:
+    print('error: ' + field + ' field does not exist')
+    sys.exit()
+    
 print("from projects: " + str(fromProjects))
-print("sort field: " + sortField)
-show(fromProjects, sortField, flatView)
+print("sort field: " + field)
+show(fromProjects, field, flatView)

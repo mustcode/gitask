@@ -10,44 +10,45 @@ import teams
 import priority
 import complexity
 
-CREATED_BY = 'created_by'
-CREATED_TIME = 'created_time'
-PROJECTS = 'projects'
-TEAMS = 'teams'
-TYPE = 'type'
-APPROVED_BY = 'approved_by'
-REJECTED_BY = 'rejected_by'
-STATUS = 'status'
-OWNERS = 'owners'
-IMPLEMENTERS = 'implementers'
-DESIGNERS = 'designers'
-TESTERS = 'testers'
-OBSERVERS = 'observers'
-SUPERVISORS = 'supervisors'
-IMPORTANCE = 'importance'
-URGENCY = 'urgency'
-COMPLEXITY = 'complexity'
-TAGS = 'tags'
+class Field(Enum):
+    created_by = 1
+    created_time = 2
+    projects = 3
+    teams = 4
+    task_type = 5
+    approved_by = 6
+    rejected_by = 7
+    status = 8
+    owners = 9
+    implementers = 10
+    designers = 11
+    testers = 12
+    observers = 13
+    supervisors = 14
+    importance = 15
+    urgency = 16
+    complexity = 17
+    tags = 18
 
 fieldsData = {
-    CREATED_BY: { 'dataType': users.valid, 'isList': False },
-    CREATED_TIME: { 'dataType': None, 'isList': False },
-    PROJECTS: { 'dataType': projects.valid, 'isList': True },
-    TEAMS: { 'dataType': teams.valid, 'isList': True },
-    TYPE: { 'dataType': tasks.types, 'isList': False },
-    APPROVED_BY: { 'dataType': users.valid, 'isList': True },
-    REJECTED_BY: { 'dataType': users.valid, 'isList': True },
-    STATUS: { 'dataType': tasks.status, 'isList': False },
-    OWNERS: { 'dataType': users.valid, 'isList': True },
-    IMPLEMENTERS: { 'dataType': users.valid, 'isList': True },
-    DESIGNERS: { 'dataType': users.valid, 'isList': True },
-    TESTERS: { 'dataType': users.valid, 'isList': True },
-    OBSERVERS: { 'dataType': users.valid, 'isList': True },
-    SUPERVISORS: { 'dataType': users.valid, 'isList': True },
-    IMPORTANCE: { 'dataType': priority.valid, 'isList': False },
-    URGENCY: { 'dataType': priority.valid, 'isList': False },
-    COMPLEXITY: { 'dataType': complexity.valid, 'isList': False },
-    TAGS: { 'dataType': None, 'isList': True }}
+    Field.created_by: { 'dataType': users.valid, 'isList': False },
+    Field.created_time: { 'dataType': None, 'isList': False },
+    Field.projects: { 'dataType': projects.valid, 'isList': True },
+    Field.teams: { 'dataType': teams.valid, 'isList': True },
+    Field.task_type: { 'dataType': tasks.Type, 'isList': False },
+    Field.approved_by: { 'dataType': users.valid, 'isList': True },
+    Field.rejected_by: { 'dataType': users.valid, 'isList': True },
+    Field.status: { 'dataType': tasks.Status, 'isList': False },
+    Field.owners: { 'dataType': users.valid, 'isList': True },
+    Field.implementers: { 'dataType': users.valid, 'isList': True },
+    Field.designers: { 'dataType': users.valid, 'isList': True },
+    Field.testers: { 'dataType': users.valid, 'isList': True },
+    Field.observers: { 'dataType': users.valid, 'isList': True },
+    Field.supervisors: { 'dataType': users.valid, 'isList': True },
+    Field.importance: { 'dataType': priority.valid, 'isList': False },
+    Field.urgency: { 'dataType': priority.valid, 'isList': False },
+    Field.complexity: { 'dataType': complexity.valid, 'isList': False },
+    Field.tags: { 'dataType': None, 'isList': True }}
 
 def dataType(field):
     return fieldsData[field]['dataType']
