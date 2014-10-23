@@ -7,7 +7,9 @@ import log
 
 if len(sys.argv) != 2:
     print('error: expected 1 argument')
-    print('usage: setval <path-to-task> | -a|--all')
+    print('usage: deltask <path-to-task> | -a|--all')
+    print('options:')
+    print('-a : delete all tasks')
     sys.exit()
 
 sys.argv[0] = 'deltask'

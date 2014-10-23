@@ -1,19 +1,19 @@
 import os
-import sys
 import shutil
+from enum import Enum
 
 import settings
 import fields
 
 def show(fromProjects, sortField, flat):
     assert isinstance(fromProjects, list)
-    assert isinstance(sortField, str)
+    assert fields.isValid(sortField)
 
     if not os.path.exists(settings.TASKS_DIR):
         print('error: task folder not found.')
         return
 
-    viewPath = settings.VIEWS_DIR + os.sep + '_'.join(fromProjects) + '-' + sortField
+    viewPath = settings.VIEWS_DIR + os.sep + '_'.join(fromProjects) + '-' + sortField.name
     
     if os.path.exists(viewPath):
         shutil.rmtree(viewPath)
@@ -23,6 +23,8 @@ def show(fromProjects, sortField, flat):
         dataType = fields.dataType(sortField)
         if dataType != None:
             for value in dataType:
+                if isinstance(value, Enum):
+                    value = value.name
                 os.makedirs(viewPath + os.sep + str(value))
 
     print('processing tasks...')
@@ -31,7 +33,7 @@ def show(fromProjects, sortField, flat):
         taskPath = settings.TASKS_DIR + os.sep + task
 
         if fromProjects:
-            projectsPath = taskPath + os.sep + fields.Field.projects
+            projectsPath = taskPath + os.sep + fields.Field.projects.name
             if os.path.exists(projectsPath):
                 projectsAssigned = os.listdir(projectsPath)
             else:
@@ -40,7 +42,7 @@ def show(fromProjects, sortField, flat):
                 continue
 
         for field in os.listdir(taskPath):
-            if not field.startswith(sortField):
+            if not field.startswith(sortField.name):
                 continue
             keyValue = field.split('-')
             key = keyValue[0]
@@ -54,34 +56,3 @@ def show(fromProjects, sortField, flat):
                 taskFile = open(valuePath + os.sep + task, 'w')
             taskFile.close()
     return
-
-if len(sys.argv) < 2:
-    print('error: expected at least 1 arguments')
-    print('usage: view [-f|--flat] [<projects...>] <sort-field>')
-    print('options:')
-    print('-f : view result in flat view')
-    sys.exit()
-
-flatView = False
-for i in range(len(sys.argv)):
-    if sys.argv[i] != '-f' and sys.argv[i] != '--flat':
-        continue
-    flatView = True
-    del sys.argv[i]
-    break
-
-if len(sys.argv) == 2:
-    fromProjects = []
-else:
-    fromProjects = sys.argv[1:-1]
-field = sys.argv[-1]
-
-try:
-    field = fields.Field[field]
-except:
-    print('error: ' + field + ' field does not exist')
-    sys.exit()
-    
-print("from projects: " + str(fromProjects))
-print("sort field: " + field)
-show(fromProjects, field, flatView)
