@@ -1,5 +1,6 @@
 import os
 import time
+import shutil
 from enum import Enum
 
 import settings
@@ -38,6 +39,14 @@ def add(taskName):
     os.makedirs(commentsPath)
 
     return taskPath
+
+def delete(taskPath):
+    assert os.path.exists(taskPath)
+    shutil.rmtree(taskPath)
+
+def deleteAll():
+    assert os.path.exists(settings.TASKS_DIR)
+    shutil.rmtree(settings.TASKS_DIR)
 
 def comment(taskPath, author, comments):
     assert isinstance(taskPath, str)

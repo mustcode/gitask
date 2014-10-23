@@ -57,7 +57,7 @@ def show(fromProjects, sortField, flat):
 
 if len(sys.argv) < 2:
     print('error: expected at least 1 arguments')
-    print('usage: view [-f] [<projects...>] <sort-field>')
+    print('usage: view [-f|--flat] [<projects...>] <sort-field>')
     print('options:')
     print('-f : view result in flat view')
     sys.exit()
