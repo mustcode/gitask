@@ -1,72 +1,69 @@
-clearlogs
-deltask -a
+python clearlogs.py
+python deltask.py -a
 
-addtask some task
-addtask another task
-addtask wrong task
-addtask new task
+python addtask.py some task
+python addtask.py another task
+python addtask.py wrong task
+python addtask.py new task
 
-deltask tasks\wrong_task
+python deltask.py tasks\wrong_task
 
-comment tasks\some_task this is a comment
+python comment.py tasks\some_task this is a comment
 
-setval tasks\some_task projects game
-setval tasks\some_task projects side
-setval tasks\some_task teams game
-setval tasks\some_task teams hr
-setval tasks\some_task task_type feature
-setval tasks\some_task approved_by mustcode
-setval tasks\some_task rejected_by eddiepocket
-setval tasks\some_task status backlog
-setval tasks\some_task owners mustcode
-setval tasks\some_task implementers eddiepocket
-setval tasks\some_task implementers mustcode
-setval tasks\some_task designers eddiepocket
-setval tasks\some_task testers mustcode
-setval tasks\some_task observers mustcode
-setval tasks\some_task supervisors mustcode
-setval tasks\some_task importance 5
-setval tasks\some_task urgency 3
-setval tasks\some_task complexity 7
-setval tasks\some_task tags fun
-setval tasks\some_task tags gui
+python setval.py tasks\some_task projects game
+python setval.py tasks\some_task projects side
+python setval.py tasks\some_task teams game
+python setval.py tasks\some_task teams hr
+python setval.py tasks\some_task task_type feature
+python setval.py tasks\some_task approved_by mustcode
+python setval.py tasks\some_task rejected_by eddiepocket
+python setval.py tasks\some_task status backlog
+python setval.py tasks\some_task importance 5
+python setval.py tasks\some_task urgency 3
+python setval.py tasks\some_task complexity 7
+python setval.py tasks\some_task tags fun
+python setval.py tasks\some_task tags gui
 
-delval tasks\some_task teams hr
-delval tasks\some_task projects
-delval tasks\some_task task_type feature
-setval tasks\some_task task_type bug
+python delval.py tasks\some_task teams hr
+python delval.py tasks\some_task projects
+python delval.py tasks\some_task task_type feature
+python setval.py tasks\some_task task_type bug
 
-setval tasks\some_task projects game
-setval tasks\some_task projects platform
-setval tasks\some_task status sprint
-setval tasks\some_task task_type workitem
+python setval.py tasks\some_task projects game
+python setval.py tasks\some_task projects platform
+python setval.py tasks\some_task status sprint
+python setval.py tasks\some_task task_type workitem
 
-setval tasks\another_task projects game
-setval tasks\another_task projects platform
-setval tasks\another_task status doing
-setval tasks\another_task task_type bug
+python setval.py tasks\another_task projects game
+python setval.py tasks\another_task projects platform
+python setval.py tasks\another_task status doing
+python setval.py tasks\another_task task_type bug
 
-setval tasks\new_task projects game
-setval tasks\new_task projects side
-setval tasks\new_task status check
-setval tasks\new_task task_type feature
+python setval.py tasks\new_task projects game
+python setval.py tasks\new_task projects side
+python setval.py tasks\new_task status check
+python setval.py tasks\new_task task_type feature
 
-updatetask tasks\some_task approve
-updatetask tasks\some_task reject
-updatetask tasks\some_task assign_role
-updatetask tasks\some_task to_backlog
-updatetask tasks\some_task to_sprint
-updatetask tasks\some_task start_work
-updatetask tasks\some_task hold_work
-updatetask tasks\some_task resume_work
-updatetask tasks\some_task finish_work
-updatetask tasks\some_task to_check
-updatetask tasks\some_task start_test
-updatetask tasks\some_task fail_test
-updatetask tasks\some_task start_fix
-updatetask tasks\some_task to_done
-updatetask tasks\some_task to_archive
+python updatetask.py tasks\some_task approve
+python updatetask.py tasks\some_task reject
+python updatetask.py tasks\some_task to_backlog
+python updatetask.py tasks\some_task to_sprint
+python updatetask.py tasks\some_task start_work
+python updatetask.py tasks\some_task hold_work
+python updatetask.py tasks\some_task resume_work
+python updatetask.py tasks\some_task finish_work
+python updatetask.py tasks\some_task to_check
+python updatetask.py tasks\some_task start_test
+python updatetask.py tasks\some_task fail_test
+python updatetask.py tasks\some_task start_fix
+python updatetask.py tasks\some_task to_done
+python updatetask.py tasks\some_task to_archive
 
-clearviews
-viewtasks game side status
-viewtasks -f side platform task_type
+python assign.py tasks\some_task eddiepocket owner
+python assign.py tasks\some_task mustcode implementer
+python assign.py tasks\some_task mustcode tester
+python assign.py -r tasks\some_task mustcode tester
+
+python clearviews.py
+python viewtasks.py game side status
+python viewtasks.py -f side platform task_type

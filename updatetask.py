@@ -24,6 +24,7 @@ except:
     print('error: action ' + action + ' does not exist')
     sys.exit()
 
+print("updating task: %s by %s" % (action.name, users.current))
 tasks.update(taskPath, users.current, action)
 log.add(' '.join(sys.argv))
 print('task updated.')

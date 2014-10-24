@@ -4,9 +4,11 @@ import shutil
 from enum import Enum
 
 import settings
+import users
 
 COMMENTS_DIR = 'comments'
 ACTIVITY_DIR = 'activity'
+ROLES_DIR = 'roles'
 
 class Status(Enum):
     requested = 1
@@ -29,19 +31,28 @@ class Type(Enum):
 class Action(Enum):
     approve = 1
     reject = 2
-    assign_role = 3
-    to_backlog = 4
-    to_sprint = 5
-    start_work = 6
-    finish_work = 7
-    hold_work = 8
-    resume_work = 9
-    to_check = 10
-    start_test = 11
-    fail_test = 12
-    start_fix = 13
-    to_done = 14
-    to_archive = 15
+    assign = 3
+    unassign = 4
+    to_backlog = 5
+    to_sprint = 6
+    start_work = 7
+    finish_work = 8
+    hold_work = 9
+    resume_work = 10
+    to_check = 11
+    start_test = 12
+    fail_test = 13
+    start_fix = 14
+    to_done = 15
+    to_archive = 16
+
+class Role(Enum):
+    owner = 1
+    implementer = 2
+    designer = 3
+    tester = 4
+    supervisor = 5
+    observer = 6
 
 def path(taskName):
     dirName = taskName.replace(' ', '_')
@@ -69,6 +80,7 @@ def deleteAll():
 
 def comment(taskPath, author, comments):
     assert isinstance(taskPath, str)
+    assert os.path.exists(taskPath)
     assert isinstance(author, str)
     assert isinstance(comments, str)
 
@@ -81,15 +93,62 @@ def comment(taskPath, author, comments):
     commentFile.write(comments)
     commentFile.close()
 
-def update(taskPath, user, action):
+def update(taskPath, user, action, params = None):
     assert isinstance(taskPath, str)
+    assert os.path.exists(taskPath)
     assert isinstance(user, str)
+    assert user in users.valid
     assert action in Action
 
     activityPath = taskPath + os.sep + ACTIVITY_DIR
     if not os.path.exists(activityPath):
         os.mkdir(activityPath)
 
+    if params:
+        assert isinstance(params, list)
+        strParams = [None] * len(params)
+        for i in range(0, len(params)):
+            if isinstance(params[i], Enum):
+                strParams[i] = params[i].name
+            else:
+                strParams[i] = str(params[i])
+        activityName = action.name + '-' + '-'.join(strParams)
+    else:
+        activityName = action.name
+
     activityTime = timeStr()
-    activityFile = open(activityPath + os.sep + activityTime + '-' + action.name + '-' + user, 'w')
+    activityFile = open(activityPath + os.sep + activityTime + '-' + activityName + '-' + user, 'w')
     activityFile.close()
+
+def assign(taskPath, user, role, assignBy):
+    assert isinstance(taskPath, str)
+    assert os.path.exists(taskPath)
+    assert isinstance(user, str)
+    assert isinstance(assignBy, str)
+    assert user in users.valid
+    assert assignBy in users.valid
+    assert role in Role
+
+    rolesPath = taskPath + os.sep + ROLES_DIR
+    if not os.path.exists(rolesPath):
+        os.mkdir(rolesPath)
+
+    roleFile = open(rolesPath + os.sep + role.name + '-' + user, 'w')
+    roleFile.close()
+    update(taskPath, assignBy, Action.assign, [user, role])
+
+def unassign(taskPath, user, role, unassignBy):
+    assert isinstance(taskPath, str)
+    assert os.path.exists(taskPath)
+    assert isinstance(user, str)
+    assert isinstance(unassignBy, str)
+    assert user in users.valid
+    assert unassignBy in users.valid
+    assert role in Role
+
+    rolesPath = taskPath + os.sep + ROLES_DIR
+    assert os.path.exists(rolesPath)
+
+    roleFile = rolesPath + os.sep + role.name + '-' + user
+    os.remove(roleFile)
+    update(taskPath, unassignBy, Action.unassign, [user, role])

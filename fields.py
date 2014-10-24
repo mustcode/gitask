@@ -20,16 +20,10 @@ class Field(Enum):
     approved_by = 6
     rejected_by = 7
     status = 8
-    owners = 9
-    implementers = 10
-    designers = 11
-    testers = 12
-    observers = 13
-    supervisors = 14
-    importance = 15
-    urgency = 16
-    complexity = 17
-    tags = 18
+    importance = 9
+    urgency = 10
+    complexity = 11
+    tags = 12
 
 fieldsData = {
     Field.created_by: { 'dataType': users.valid, 'isList': False },
@@ -40,12 +34,6 @@ fieldsData = {
     Field.approved_by: { 'dataType': users.valid, 'isList': True },
     Field.rejected_by: { 'dataType': users.valid, 'isList': True },
     Field.status: { 'dataType': tasks.Status, 'isList': False },
-    Field.owners: { 'dataType': users.valid, 'isList': True },
-    Field.implementers: { 'dataType': users.valid, 'isList': True },
-    Field.designers: { 'dataType': users.valid, 'isList': True },
-    Field.testers: { 'dataType': users.valid, 'isList': True },
-    Field.observers: { 'dataType': users.valid, 'isList': True },
-    Field.supervisors: { 'dataType': users.valid, 'isList': True },
     Field.importance: { 'dataType': priority.valid, 'isList': False },
     Field.urgency: { 'dataType': priority.valid, 'isList': False },
     Field.complexity: { 'dataType': complexity.valid, 'isList': False },
