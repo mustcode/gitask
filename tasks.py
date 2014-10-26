@@ -30,6 +30,8 @@ def add(taskName):
     descFile.write('write description for this task here...')
     descFile.close()
     __setStatus(taskPath, Status.requested)
+    fields.add(taskPath, fields.Field.created_by, users.current)
+    fields.add(taskPath, fields.Field.created_time, timeStr())
     return taskPath
 
 def delete(taskPath):

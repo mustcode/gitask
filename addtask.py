@@ -18,8 +18,6 @@ if os.path.exists(tasks.path(taskName)):
     sys.exit()
 
 print('adding task: ' + taskName)
-taskPath = tasks.add(taskName)
-fields.add(taskPath, fields.Field.created_by, users.current)
-fields.add(taskPath, fields.Field.created_time, time.strftime('%Y%m%dT%H%M%S', time.gmtime()))
+tasks.add(taskName)
 log.add('addtask ' + taskName)
 print('task added.')
