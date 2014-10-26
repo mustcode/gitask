@@ -4,6 +4,7 @@ import os
 import users
 import tasks
 import log
+from action import Action
 
 if len(sys.argv) != 3:
     print('error: expected 2 argument')
@@ -19,7 +20,7 @@ if not os.path.exists(taskPath):
     sys.exit()
 
 try:
-    action = tasks.Action[action]
+    action = Action[action]
 except:
     print('error: action ' + action + ' does not exist')
     sys.exit()

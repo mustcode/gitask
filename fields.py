@@ -5,11 +5,12 @@ import shutil
 from enum import Enum
 
 import users
-import tasks
 import projects
 import teams
 import priority
 import complexity
+from status import Status
+from tasktype import TaskType
 
 class Field(Enum):
     created_by = 1
@@ -30,10 +31,10 @@ fieldsData = {
     Field.created_time: { 'dataType': None, 'isList': False },
     Field.projects: { 'dataType': projects.valid, 'isList': True },
     Field.teams: { 'dataType': teams.valid, 'isList': True },
-    Field.task_type: { 'dataType': tasks.Type, 'isList': False },
+    Field.task_type: { 'dataType': TaskType, 'isList': False },
     Field.approved_by: { 'dataType': users.valid, 'isList': True },
     Field.rejected_by: { 'dataType': users.valid, 'isList': True },
-    Field.status: { 'dataType': tasks.Status, 'isList': False },
+    Field.status: { 'dataType': Status, 'isList': False },
     Field.importance: { 'dataType': priority.valid, 'isList': False },
     Field.urgency: { 'dataType': priority.valid, 'isList': False },
     Field.complexity: { 'dataType': complexity.valid, 'isList': False },

@@ -1,59 +1,19 @@
 import os
 import time
 import shutil
+import glob
 from enum import Enum
 
 import settings
 import users
+import fields
+from status import Status
+from role import Role
+from action import Action
 
 COMMENTS_DIR = 'comments'
 ACTIVITY_DIR = 'activity'
 ROLES_DIR = 'roles'
-
-class Type(Enum):
-    feature = 1
-    improvement = 2
-    issue = 3
-    bug = 4
-    workitem = 5
-
-class Status(Enum):
-    requested = 1
-    rejected = 2
-    backlog = 3
-    sprint = 4
-    doing = 5
-    check = 6
-    done = 7
-    arhived = 8
-    problem = 9
-
-class Action(Enum):
-    approve = 1
-    reject = 2
-    assign = 3
-    unassign = 4
-    to_backlog = 5
-    to_sprint = 6
-    start_work = 7
-    finish_work = 8
-    hold_work = 9
-    resume_work = 10
-    to_check = 11
-    start_test = 12
-    fail_test = 13
-    start_fix = 14
-    to_done = 15
-    to_archive = 16
-
-class Role(Enum):
-    owner = 1
-    implementer = 2
-    designer = 3
-    tester = 4
-    reviewer = 5
-    supervisor = 6
-    observer = 7
 
 def path(taskName):
     dirName = taskName.replace(' ', '_')
@@ -69,6 +29,7 @@ def add(taskName):
     descFile = open(taskPath + os.sep + 'description.txt', 'w')
     descFile.write('write description for this task here...')
     descFile.close()
+    __setStatus(taskPath, Status.requested)
     return taskPath
 
 def delete(taskPath):
@@ -120,6 +81,7 @@ def update(taskPath, user, action, params = None):
     activityTime = timeStr()
     activityFile = open(activityPath + os.sep + activityTime + '-' + activityName + '-' + user, 'w')
     activityFile.close()
+    __updateStatus(taskPath, action)
 
 def assign(taskPath, user, role, assignBy):
     assert isinstance(taskPath, str)
@@ -153,3 +115,37 @@ def unassign(taskPath, user, role, unassignBy):
     roleFile = rolesPath + os.sep + role.name + '-' + user
     os.remove(roleFile)
     update(taskPath, unassignBy, Action.unassign, [user, role])
+
+def __updateStatus(taskPath, fromAction):
+    assert isinstance(taskPath, str)
+    assert fromAction in Action 
+
+    if fromAction == Action.approve:
+        __setStatus(taskPath, Status.backlog)
+    elif fromAction == Action.reject:
+        __setStatus(taskPath, Status.rejected)
+    elif fromAction == Action.to_backlog:
+        __setStatus(taskPath, Status.backlog)
+    elif fromAction == Action.to_sprint:
+        __setStatus(taskPath, Status.sprint)
+    elif fromAction == Action.to_review:
+        __setStatus(taskPath, Status.review)
+    elif fromAction == Action.fail_review:
+        __setStatus(taskPath, Status.fail)
+    elif fromAction == Action.to_check:
+        __setStatus(taskPath, Status.check)
+    elif fromAction == Action.fail_check:
+        __setStatus(taskPath, Status.fail)
+    elif fromAction == Action.start_fix:
+        __setStatus(taskPath, Status.fix)
+    elif fromAction == Action.to_done:
+        __setStatus(taskPath, Status.done)
+    elif fromAction == Action.to_problem:
+        __setStatus(taskPath, Status.problem)
+    elif fromAction == Action.to_archive:
+        __setStatus(taskPath, Status.arhived)
+
+def __setStatus(taskPath, status):
+    assert isinstance(taskPath, str)
+    assert status in Status
+    fields.add(taskPath, fields.Field.status, status)

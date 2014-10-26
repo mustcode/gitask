@@ -4,6 +4,7 @@ import os
 import users
 import tasks
 import log
+from role import Role
 
 if len(sys.argv) < 4:
     print('error: expected 3-4 argument')
@@ -34,7 +35,7 @@ if not user in users.valid:
     sys.exit()
 
 try:
-    role = tasks.Role[role]
+    role = Role[role]
 except:
     print('error: role ' + role + ' does not exist')
 
