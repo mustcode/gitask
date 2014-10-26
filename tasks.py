@@ -10,6 +10,13 @@ COMMENTS_DIR = 'comments'
 ACTIVITY_DIR = 'activity'
 ROLES_DIR = 'roles'
 
+class Type(Enum):
+    feature = 1
+    improvement = 2
+    issue = 3
+    bug = 4
+    workitem = 5
+
 class Status(Enum):
     requested = 1
     rejected = 2
@@ -20,13 +27,6 @@ class Status(Enum):
     done = 7
     arhived = 8
     problem = 9
-
-class Type(Enum):
-    feature = 1
-    improvement = 2
-    issue = 3
-    bug = 4
-    workitem = 5
 
 class Action(Enum):
     approve = 1
@@ -51,8 +51,9 @@ class Role(Enum):
     implementer = 2
     designer = 3
     tester = 4
-    supervisor = 5
-    observer = 6
+    reviewer = 5
+    supervisor = 6
+    observer = 7
 
 def path(taskName):
     dirName = taskName.replace(' ', '_')
