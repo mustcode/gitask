@@ -2,6 +2,8 @@ import sys
 import os
 
 import fields
+import tasks
+import users
 import log
 
 argvCount = len(sys.argv)
@@ -41,6 +43,6 @@ if value:
 else:
     print("deleting field: " + field.name)
 
-fields.remove(taskPath, field, value)
+tasks.removeField(taskPath, users.current, field, value)
 log.add(' '.join(sys.argv))
 print('value deleted.')

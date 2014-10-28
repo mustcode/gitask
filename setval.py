@@ -3,6 +3,8 @@ import os
 from enum import Enum
 
 import fields
+import tasks
+import users
 import log
 
 if len(sys.argv) != 4:
@@ -34,6 +36,6 @@ if not fields.isValid(field, value):
     sys.exit()
 
 print("setting field: %s = %s" % (field, value))
-fields.add(taskPath, field, value)
+tasks.addField(taskPath, users.current, field, value)
 log.add(' '.join(sys.argv))
 print('value added.')

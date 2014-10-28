@@ -85,6 +85,14 @@ def update(taskPath, user, action, params = None):
     activityFile.close()
     __updateStatus(taskPath, action)
 
+def addField(taskPath, user, field, value, replaceCurrentList = False):
+    fields.add(taskPath, field, value, replaceCurrentList)
+    update(taskPath, user, Action.add_field, [field, value])
+
+def removeField(taskPath, user, field, value = None):
+    fields.remove(taskPath, field, value)
+    update(taskPath, user, Action.remove_field, [field, value])
+
 def assign(taskPath, user, role, assignBy):
     assert isinstance(taskPath, str)
     assert os.path.exists(taskPath)
