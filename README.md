@@ -5,11 +5,11 @@ Gitask is a task management tool based on git, python, and your file system.
 
 How it Works
 ------------
-TBA
+Gitask is a task management system that store information as files and folders. Gitask require no server or database to operate, instead it uses git to synchronize data between multiple users. Gitask provides a set of python scripts for users to perform actions such as adding, removing, updating and syncing tasks with other users.
 
 Get Started
 -----------
-TBA
+
 
 Commands
 --------
