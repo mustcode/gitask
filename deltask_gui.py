@@ -20,6 +20,8 @@ class DeleteTaskPanel(tk.Frame):
         self.deleteButton.pack()
         self.refreshButton = tk.Button(self, text = "Refresh", command = self.populateData)
         self.refreshButton.pack()
+        self.syncButton = tk.Button(self, text = "Sync", command = self.syncData)
+        self.syncButton.pack()
 
     def populateData(self):
         self.clearData();
@@ -41,6 +43,9 @@ class DeleteTaskPanel(tk.Frame):
 
     def deleteTaskKey(self, event):
         self.deleteTask()
+
+    def syncData(sefl):
+        subprocess.call([settings.PYTHON_EXE, 'sync.py'])
 
 root = tk.Tk()
 root.title("Gitask - delete task")

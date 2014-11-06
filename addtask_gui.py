@@ -16,6 +16,8 @@ class AddTaskPanel(tk.Frame):
         self.taskNameEntry.focus_set()
         self.addButton = tk.Button(self, text = "Add Task", command = self.addTask)
         self.addButton.pack()
+        self.syncButton = tk.Button(self, text = "Sync", command = self.syncData)
+        self.syncButton.pack()
 
     def addTask(self):
         subprocess.call([settings.PYTHON_EXE, 'addtask.py', self.taskNameEntry.get()])
@@ -24,6 +26,9 @@ class AddTaskPanel(tk.Frame):
 
     def addTaskKey(self, event):
         self.addTask()
+
+    def syncData(sefl):
+        subprocess.call([settings.PYTHON_EXE, 'sync.py'])
 
 root = tk.Tk()
 root.title("Gitask - add task")
