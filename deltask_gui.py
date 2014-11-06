@@ -29,7 +29,6 @@ class DeleteTaskPanel(tk.Frame):
             return
         index = 1
         for task in os.listdir(settings.TASKS_DIR):
-            print(task)
             taskPath = settings.TASKS_DIR + os.sep + task
             self.taskListbox.insert(index, taskPath)
             index += 1
