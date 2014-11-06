@@ -25,6 +25,8 @@ class DeleteTaskPanel(tk.Frame):
 
     def populateData(self):
         self.clearData();
+        if not os.path.exists(settings.TASKS_DIR):
+            return
         index = 1
         for task in os.listdir(settings.TASKS_DIR):
             print(task)
